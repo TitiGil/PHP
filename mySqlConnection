@@ -1,0 +1,82 @@
+<?php
+
+class Con {
+
+    // three necessary data to connect DB 
+    private $Server;
+    private $UserName;
+    private $Pass;
+    private $connection;
+    private $dbName;
+    function __construct($Server, $UserName, $Pass,$dbName)
+    {
+        $this-> Server = $Server;
+        $this-> UserName = $UserName;
+        $this-> Pass = $Pass;
+        $this-> dbName = $dbName;
+        //echo "dbname is  $dbName user $UserName pass $Pass server $Server";
+        if($this->dbName != '') {
+            $this->connection = new mysqli($this->Server,$this->UserName,$this->Pass,$this->dbName); 
+      
+            if($this->connection -> connect_error){
+                die("connection Failed : ".$this->connection->connect_error);
+            }
+            else{
+              //  echo "Connected successful 1";
+            }
+        }
+        else{
+            $this->connection = new mysqli($this->Server,$this->UserName,$this->Pass); 
+      
+            if($this->connection -> connect_error){
+                die("connection Failed : ".$this->connection->connect_error);
+            }
+            else{
+//            echo "Connected successful 2";
+            }
+        }
+    }
+    public function returnConnection(){
+
+        return $this;
+    }
+
+   function query($sql){
+        $result=  $this->connection -> query($sql);
+        return $result;
+     
+   }
+    function createDataBase($DBName){
+
+        $sql = "CREATE DATABASE ".$DBName;
+        if ($this->connection->query($sql) === TRUE) {
+            echo "Database created successfully";
+        } else {
+            echo "Error creating database: " . $this->connection->error;
+            }
+        }
+ 
+    function dropDataBase($DBName){
+        $sql = "DROP DATABASE ".$DBName;
+        if ($this->connection->query($sql) === TRUE) {
+            echo "Database drop successfully";
+        } else {
+            echo "Error droping database: " . $this->connection->error;
+            }
+        
+        }
+        function close(){
+            $this->connection -> close();
+        }
+}
+
+// crete connection to db
+
+// $conn=new Con('localhost','root','');
+
+// // check if connect error
+
+
+// $conn->dropDataBase("test2");
+
+?>
