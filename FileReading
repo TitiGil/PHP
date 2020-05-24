@@ -1,0 +1,19 @@
+<?php
+
+
+header('Content-Type: text/html; charset=utf-8');
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Headers', "*");
+$myfile = fopen("../fileAddress", "r") or die("Unable to open file!");
+// ****** read the whole file base on the size of file ****//
+echo fread($myfile,filesize('../fileadress'));
+fclose($myfile);
+
+?>
+
+/* Read and echo file line by line **///
+ <?php
+$myfile = fopen("fileadress.txt", "r") or die("Unable to open file!");
+echo fgets($myfile);
+fclose($myfile);
+?> 
