@@ -17,7 +17,7 @@ class Con {
         //echo "dbname is  $dbName user $UserName pass $Pass server $Server";
         if($this->dbName != '') {
             $this->connection = new mysqli($this->Server,$this->UserName,$this->Pass,$this->dbName); 
-      
+            mysqli_query ($this->connection,'SET NAMES UTF8');
             if($this->connection -> connect_error){
                 die("connection Failed : ".$this->connection->connect_error);
             }
@@ -27,7 +27,7 @@ class Con {
         }
         else{
             $this->connection = new mysqli($this->Server,$this->UserName,$this->Pass); 
-      
+            mysqli_query ($this->connection,'SET NAMES UTF8');
             if($this->connection -> connect_error){
                 die("connection Failed : ".$this->connection->connect_error);
             }
