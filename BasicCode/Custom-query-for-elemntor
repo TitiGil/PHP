@@ -1,0 +1,27 @@
+add_action( 'elementor/query/custom-query', function( $query ) {
+    // Here we set the query to fetch posts with
+    // post type of 'custom-post-type1' and 'custom-post-type2'
+
+    
+    $meta_query = $query->get( 'meta_query' );
+
+    // If there is no meta query when this filter runs, it should be initialized as an empty array.
+    if ( ! $meta_query ) {
+        $meta_query = [];
+    }
+
+    // Append our meta query
+    $meta_query[] = [
+     'post_type'         => 'event',
+    'posts_per_page'    => -1,
+    
+
+ 
+    ];
+    
+    $query->set( 'orderby', 'meta_value' );
+    $query->set( 'meta_key', 'views' );
+    $query->set( 'meta_query', $meta_query );
+    
+    
+} );
