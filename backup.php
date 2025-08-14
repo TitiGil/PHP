@@ -1,8 +1,7 @@
 <?php
 echo 'test';
 $dir = dirname(__DIR__);
-echo $dir;
-$files = array_diff(scandir($dir), array('.', '..')); 
+
 
 
 
